@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Order Program Warung Cantik NSQUEEN</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f7c59f, #f27a54);
+    margin: 0;
+    padding: 0;
+    color: #320a00;
+  }
+  .container {
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem 3rem 3rem 3rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  h1, h2, h3 {
+    font-weight: 600;
+    color: #d94f2a;
+    letter-spacing: 1.5px;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f27a54;
+    padding-bottom: 0.3rem;
+  }
+  h3 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1.5px solid #d94f2a;
+    padding-bottom: 0.25rem;
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #75320a;
+  }
+  input[type="text"],
+  input[type="tel"],
+  textarea,
+  select,
+  input[type="date"] {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 1.3rem;
+    border: 2px solid #f7c59f;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #320a00;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  textarea:focus,
+  select:focus,
+  input[type="date"]:focus {
+    border-color: #f27a54;
+    outline: none;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+  .form-row {
+    margin-bottom: 1.3rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.3rem;
+    font-size: 0.8rem;
+  }
+  thead {
+    background: #f27a54;
+    color: #fff;
+  }
+  th, td {
+    padding: 0.5rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #f7c59f;
+    vertical-align: top;
+    font-size: 0.75rem;
+  }
+  th {
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+  td input[type="text"],
+  td input[type="number"] {
+    width: 98%;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #f7c59f;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    color: #320a00;
+  }
+  td input[type="number"]::-webkit-inner-spin-button,
+  td input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .add-row-btn {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    background-color: #d94f2a;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+  }
+  .add-row-btn:hover {
+    background-color: #b34426;
+  }
+  .totals {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1.8rem;
+    padding: 1rem 1.3rem;
+    background: #f7c59f;
+    border-radius: 8px;
+    color: #75320a;
+    user-select: none;
+  }
+  .buttons-wrapper {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  button.download-btn, button.process-btn {
+    flex: 1;
+    min-width: 150px;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.6rem 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+  }
+  .download-btn {
+    background-color: #75320a;
+    color: white;
+  }
+  .download-btn:hover {
+    background-color: #a04a1d;
+  }
+  .process-btn {
+    background-color: #2d855f;
+    color: white;
+  }
+  .process-btn:hover {
+    background-color: #246c4c;
+  }
+  .remove-btn {
+    background-color: #e4572e;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    font-size: 0.75rem;
+  }
+  .remove-btn:hover {
+    background-color: #cc3f16;
+  }
+  /* History section */
+  #historySection {
+    background: #fff5e9;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+  }
+  #historySection label {
+    margin-bottom: 0.5rem;
+  }
+  #historyControls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  #historyControls > div {
+    flex: 1;
+    min-width: 120px;
+  }
+  .history-table, .commission-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+  }
+  .history-table th, .history-table td, .commission-table th, .commission-table td {
+    border: 1px solid #f7c59f;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    color: #320a00;
+  }
+  .history-table thead, .commission-table thead {
+    background: #f27a54;
+    color: white;
+    user-select: none;
+  }
+  .expand-btn {
+    cursor: pointer;
+    color: #75320a;
+    border: none;
+    background: none;
+    font-weight: 800;
+    font-size: 1rem;
+    user-select: none;
+  }
+  .product-detail-row {
+    background-color: #f7c59f;
+    color: #320a00;
+  }
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container {
+      padding: 1rem 1rem 2rem 1rem;
+      max-width: 100%;
+      margin: 1rem auto 2rem;
+    }
+    th:nth-child(5), td:nth-child(5),
+    th:nth-child(8), td:nth-child(8) {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Order Form Warung Cantik NSQUEEN">
+    <h1>Warung Cantik NSQUEEN - Order Form</h1>
+    <form id="orderForm" autocomplete="off" novalidate>
+      <div class="form-row">
+        <label for="orderDate">Tanggal Order</label>
+        <input type="text" id="orderDate" name="orderDate" readonly aria-readonly="true" />
+      </div>
+      <div class="form-row">
+        <label for="idMitra">ID Mitra Warung Cantik</label>
+        <input type="text" id="idMitra" name="idMitra" placeholder="Masukkan ID Mitra" required />
+      </div>
+      <div class="form-row">
+        <label for="partnerName">Nama/Toko Mitra</label>
+        <input type="text" id="partnerName" name="partnerName" placeholder="Nama/Toko Mitra" required readonly />
+      </div>
+      <div class="form-row">
+        <label for="customerName">Nama Konsumen</label>
+        <input type="text" id="customerName" name="customerName" placeholder="Masukkan nama konsumen" required />
+      </div>
+      <div class="form-row">
+        <label for="phoneNumber">Nomor Telepon</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Masukkan nomor telepon" pattern="[0-9+ ]+" required />
+      </div>
+      <div class="form-row">
+        <label for="address">Alamat Pengiriman</label>
+        <textarea id="address" name="address" placeholder="Masukkan alamat pengiriman" required></textarea>
+      </div>
+
+      <h2>Detail Pembelian Produk</h2>
+      <p style="font-size: 0.75rem; color: #75320a; margin-bottom: 8px;">
+        <strong>Catatan:</strong> Kolom Qty dan Harga tidak dijumlahkan otomatis di detail produk, harap diisi manual. Hanya total pembayaran dan komisi yang dihitung otomatis.
+      </p>
+      <button type="button" class="add-row-btn" id="addProductBtn" aria-label="Tambah baris produk">Tambah Produk +</button>
+      <table aria-label="Daftar produk yang dibeli" id="productsTable">
+        <thead>
+          <tr>
+            <th>Produk</th>
+            <th>Qty</th>
+            <th>Harga (Rp)</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="productsBody">
+          <!-- Product rows appear here -->
+        </tbody>
+      </table>
+
+      <div class="form-row">
+        <label for="paymentMethod">Metode Pembayaran</label>
+        <select id="paymentMethod" name="paymentMethod" required>
+          <option value="" disabled selected>Pilih metode pembayaran</option>
+          <option value="Tunai">Tunai</option>
+          <option value="Transfer">Transfer</option>
+        </select>
+      </div>
+
+      <div class="totals" aria-live="polite" aria-atomic="true" id="summaryDisplay">
+        <div>Total Pembayaran: Rp <span id="totalPayment">0</span></div>
+        <div>Komisi: Rp <span id="commission">0</span></div>
+      </div>
+
+      <div class="buttons-wrapper">
+        <button type="button" class="process-btn" id="processOrderBtn" aria-label="Proses pesanan">Proses Pesanan</button>
+        <button type="button" class="download-btn" id="downloadBtn" aria-label="Download seluruh history pembelian sebagai Excel CSV">Download Data Excel</button>
+      </div>
+    </form>
+
+    <section id="historySection" aria-label="History Pembelian Warung Cantik NSQUEEN">
+      <h2>History Pembelian</h2>
+      <div id="historyControls">
+        <div>
+          <label for="filterType">Pilih Filter:</label>
+          <select id="filterType" aria-controls="historyTable">
+            <option value="all">Semua</option>
+            <option value="date">Tanggal</option>
+            <option value="month">Bulan</option>
+            <option value="year">Tahun</option>
+          </select>
+        </div>
+        <div id="filterDateContainer" style="display:none;">
+          <label for="filterDate">Pilih Tanggal:</label>
+          <input type="date" id="filterDate" aria-controls="historyTable" />
+        </div>
+        <div id="filterMonthContainer" style="display:none;">
+          <label for="filterMonth">Pilih Bulan:</label>
+          <input type="month" id="filterMonth" aria-controls="historyTable" />
+        </div>
+        <div id="filterYearContainer" style="display:none;">
+          <label for="filterYear">Pilih Tahun:</label>
+          <select id="filterYear" aria-controls="historyTable"></select>
+        </div>
+      </div>
+
+      <table class="history-table" id="historyTable" aria-live="polite" aria-atomic="true">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Tanggal Order</th>
+            <th>ID Mitra</th>
+            <th>Nama/Toko Mitra</th>
+            <th>Nama Konsumen</th>
+            <th>No. Telepon</th>
+            <th>Metode Pembayaran</th>
+            <th>Total (Rp)</th>
+            <th>Komisi (Rp)</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+      <p id="noHistoryMsg" style="color:#75320a; text-align:center; font-weight:600; display:none;">
+        Tidak ada data pembelian sesuai filter.
+      </p>
+
+      <h3>Rekap Komisi Per ID Mitra</h3>
+      <table class="commission-table" id="commissionTable" aria-live="polite" aria-atomic="true">
+        <thead>
+          <tr>
+            <th>ID Mitra</th>
+            <th>Nama/Toko Mitra</th>
+            <th>Saldo Komisi Awal (Rp)</th>
+            <th>Saldo Komisi Setelah Pencairan (Rp)</th>
+            <th>Tanggal Pencairan</th>
+            <th>Aksi</th>
+            <th>Download Bukti</th>
+          </tr>
+        </thead>
+        <tbody id="commissionBody"></tbody>
+      </table>
+      <div style="margin-top: 1rem; font-style: italic; color: #75320a;">
+        * Komisi akan kembali ke 0 setelah dikonfirmasi cair (misalnya setiap minggu, 2 minggu, atau bulan)<br>
+        Gunakan tombol "Konfirmasi Cairkan Komisi" pada setiap ID Mitra di bawah untuk mengatur ulang komisi.
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function formatRupiah(num) {
+      if (isNaN(num) || num === '') return '0';
+      return Number(num).toLocaleString('id-ID');
+    }
+
+    function sanitizeProductName(name) {
+      return name.trim().toUpperCase();
+    }
+
+    function updateOrderDate() {
+      const input = document.getElementById('orderDate');
+      const today = new Date();
+      const d = String(today.getDate()).padStart(2, '0');
+      const m = String(today.getMonth() + 1).padStart(2, '0');
+      const y = today.getFullYear();
+      input.value = `${d}/${m}/${y}`;
+    }
+    updateOrderDate();
+
+    const productsBody = document.getElementById('productsBody');
+    const addProductBtn = document.getElementById('addProductBtn');
+    const totalPaymentSpan = document.getElementById('totalPayment');
+    const commissionSpan = document.getElementById('commission');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const processOrderBtn = document.getElementById('processOrderBtn');
+    const paymentMethodSelect = document.getElementById('paymentMethod');
+    const idMitraInput = document.getElementById('idMitra');
+    const partnerNameInput = document.getElementById('partnerName');
+
+    const filterTypeSelect = document.getElementById('filterType');
+    const filterDateContainer = document.getElementById('filterDateContainer');
+    const filterDateInput = document.getElementById('filterDate');
+    const filterMonthContainer = document.getElementById('filterMonthContainer');
+    const filterMonthInput = document.getElementById('filterMonth');
+    const filterYearContainer = document.getElementById('filterYearContainer');
+    const filterYearSelect = document.getElementById('filterYear');
+    const historyBody = document.getElementById('historyBody');
+    const noHistoryMsg = document.getElementById('noHistoryMsg');
+    const commissionBody = document.getElementById('commissionBody');
+
+    function getPartnersFromStorage() {
+      return JSON.parse(localStorage.getItem('warungCantikPartners')) || {};
+    }
+    function savePartnersToStorage(partners) {
+      localStorage.setItem('warungCantikPartners', JSON.stringify(partners));
+    }
+
+    function getCommissionPayoutData() {
+      return JSON.parse(localStorage.getItem('warungCantikCommissionPayout')) || {};
+    }
+    function saveCommissionPayoutData(data) {
+      localStorage.setItem('warungCantikCommissionPayout', JSON.stringify(data));
+    }
+
+    function syncPartnerName() {
+      const id = idMitraInput.value.trim();
+      const partners = getPartnersFromStorage();
+      if (id === '') {
+        partnerNameInput.value = '';
+        partnerNameInput.readOnly = true;
+      } else if (partners[id]) {
+        partnerNameInput.value = partners[id];
+        partnerNameInput.readOnly = true;
+      } else {
+        partnerNameInput.value = '';
+        partnerNameInput.readOnly = false;
+      }
+    }
+    idMitraInput.addEventListener('input', syncPartnerName);
+    partnerNameInput.addEventListener('blur', () => {
+      const id = idMitraInput.value.trim();
+      const name = partnerNameInput.value.trim();
+      if (id === '' || name === '') return;
+      let partners = getPartnersFromStorage();
+      if (!partners[id]) {
+        partners[id] = name;
+        savePartnersToStorage(partners);
+        partnerNameInput.readOnly = true;
+      }
+    });
+
+    function createProductRow(product = '', qty = '', price = '') {
+      const tr = document.createElement('tr');
+      const tdProduct = document.createElement('td');
+      const productInput = document.createElement('input');
+      productInput.type = 'text';
+      productInput.placeholder = 'Nama produk';
+      productInput.value = product;
+      productInput.required = true;
+      productInput.autocomplete = "off";
+      tdProduct.appendChild(productInput);
+      const tdQty = document.createElement('td');
+      const qtyInput = document.createElement('input');
+      qtyInput.type = 'number';
+      qtyInput.min = '1';
+      qtyInput.placeholder = 'Qty';
+      qtyInput.value = qty;
+      qtyInput.required = true;
+      qtyInput.autocomplete = "off";
+      tdQty.appendChild(qtyInput);
+      const tdPrice = document.createElement('td');
+      const priceInput = document.createElement('input');
+      priceInput.type = 'number';
+      priceInput.min = '0';
+      priceInput.placeholder = 'Harga';
+      priceInput.value = price;
+      priceInput.required = true;
+      priceInput.autocomplete = "off";
+      tdPrice.appendChild(priceInput);
+      const tdAction = document.createElement('td');
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.textContent = 'Hapus';
+      removeBtn.className = 'remove-btn';
+      removeBtn.title = 'Hapus produk ini';
+      removeBtn.addEventListener('click', () => {
+        tr.remove();
+        updateTotals();
+      });
+      tdAction.appendChild(removeBtn);
+      tr.appendChild(tdProduct);
+      tr.appendChild(tdQty);
+      tr.appendChild(tdPrice);
+      tr.appendChild(tdAction);
+      [productInput, qtyInput, priceInput].forEach(input => {
+        input.addEventListener('input', updateTotals);
+      });
+      return tr;
+    }
+
+    addProductBtn.addEventListener('click', () => {
+      productsBody.appendChild(createProductRow());
+      updateTotals();
+    });
+
+    productsBody.appendChild(createProductRow());
+
+    // Only total payment and commission are calculated automatically,
+    // subtotals in product detail are removed per user request
+    function updateTotals() {
+      let total = 0;
+      let commissionTotal = 0;
+      const rows = productsBody.querySelectorAll('tr');
+      rows.forEach(row => {
+        const product = row.children[0].querySelector('input').value;
+        let qty = parseInt(row.children[1].querySelector('input').value);
+        let price = parseFloat(row.children[2].querySelector('input').value);
+        qty = isNaN(qty) ? 0 : qty;
+        price = isNaN(price) ? 0 : price;
+        const productHasPaket = product && sanitizeProductName(product).includes('PAKET');
+        total += qty * price;
+        const commissionPerUnit = productHasPaket ? 20000 : 5000;
+        commissionTotal += qty * commissionPerUnit;
+      });
+      totalPaymentSpan.textContent = formatRupiah(Math.round(total));
+      commissionSpan.textContent = formatRupiah(Math.round(commissionTotal));
+    }
+
+    function validateForm() {
+      if (!idMitraInput.value.trim()) { alert('Mohon isi ID Mitra Warung Cantik.'); return false; }
+      if (!partnerNameInput.value.trim()) { alert('Mohon isi Nama/Toko Mitra Warung Cantik.'); return false; }
+      if (!document.getElementById('customerName').value.trim()) { alert('Mohon isi Nama Konsumen.'); return false; }
+      if (!document.getElementById('phoneNumber').value.trim()) { alert('Mohon isi Nomor Telepon.'); return false; }
+      if (!document.getElementById('address').value.trim()) { alert('Mohon isi Alamat Pengiriman.'); return false; }
+      if (!paymentMethodSelect.value) { alert('Mohon pilih Metode Pembayaran.'); return false; }
+      if (productsBody.children.length === 0) { alert('Mohon tambahkan setidaknya satu produk.'); return false; }
+      for (const row of productsBody.children) {
+        const product = row.children[0].querySelector('input').value.trim();
+        const qty = row.children[1].querySelector('input').value.trim();
+        const price = row.children[2].querySelector('input').value.trim();
+        if (!product || !qty || !price) { alert('Mohon lengkapi semua kolom produk dengan benar.'); return false; }
+      }
+      return true;
+    }
+
+    const STORAGE_KEY = 'warungCantikOrders';
+
+    function saveOrderToStorage(order) {
+      let orders = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      orders.push(order);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+    }
+
+    function getOrdersFromStorage() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    }
+
+    function formatDateDMY(date) {
+      const d = String(date.getDate()).padStart(2,'0');
+      const m = String(date.getMonth()+1).padStart(2,'0');
+      const y = date.getFullYear();
+      return `${d}/${m}/${y}`;
+    }
+
+    processOrderBtn.addEventListener('click', () => {
+      if (!validateForm()) return;
+      const orderDateStr = formatDateDMY(new Date());
+      const idMitra = idMitraInput.value.trim();
+      const partnerName = partnerNameInput.value.trim();
+      const customerName = document.getElementById('customerName').value.trim();
+      const phoneNumber = document.getElementById('phoneNumber').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const paymentMethod = paymentMethodSelect.value;
+      const commission = commissionSpan.textContent.trim();
+      const totalPayment = totalPaymentSpan.textContent.trim();
+
+      let partners = JSON.parse(localStorage.getItem('warungCantikPartners')) || {};
+      if(!partners[idMitra]) {
+        partners[idMitra] = partnerName;
+        localStorage.setItem('warungCantikPartners', JSON.stringify(partners));
+      }
+
+      const products = [];
+      productsBody.querySelectorAll('tr').forEach(row => {
+        const product = row.children[0].querySelector('input').value.trim();
+        const qty = parseInt(row.children[1].querySelector('input').value);
+        const price = parseFloat(row.children[2].querySelector('input').value);
+        products.push({ product, qty, price });
+      });
+
+      const order = {
+        idMitra,
+        orderDate: orderDateStr,
+        partnerName,
+        customerName,
+        phoneNumber,
+        address,
+        paymentMethod,
+        commission,
+        totalPayment,
+        products
+      };
+
+      saveOrderToStorage(order);
+
+      alert('Pesanan berhasil diproses! Terima kasih telah memesan di Warung Cantik NSQUEEN.');
+
+      resetForm();
+      updateOrderDate();
+      populateHistoryTable();
+      populateCommissionSummary();
+    });
+
+    function resetForm() {
+      idMitraInput.value = '';
+      partnerNameInput.value = '';
+      partnerNameInput.readOnly = true;
+      document.getElementById('customerName').value = '';
+      document.getElementById('phoneNumber').value = '';
+      document.getElementById('address').value = '';
+      paymentMethodSelect.value = '';
+      productsBody.innerHTML = '';
+      productsBody.appendChild(createProductRow());
+      updateTotals();
+    }
+
+    downloadBtn.addEventListener('click', () => {
+      const orders = getOrdersFromStorage();
+      if (!orders.length) {
+        alert('Belum ada data pembelian untuk di-download.');
+        return;
+      }
+      let csvContent = 'data:text/csv;charset=utf-8,';
+      csvContent += 'Tanggal Order,ID Mitra,Nama/Toko Mitra,Nama Konsumen,No. Telepon,Alamat Pengiriman,Metode Pembayaran,Komisi Mitra (Rp)\r\n';
+      orders.forEach(order => {
+        const orderDate = order.orderDate;
+        const idMitra = order.idMitra.replace(/,/g, ' ');
+        const partnerName = order.partnerName.replace(/,/g, ' ');
+        const customerName = order.customerName.replace(/,/g, ' ');
+        const phoneNumber = order.phoneNumber.replace(/,/g, ' ');
+        const address = order.address.replace(/,/g, ' ');
+        const paymentMethod = order.paymentMethod;
+        let commissionNum = Number(String(order.commission).replace(/[^\d]/g,'')) || 0;
+        const commissionFormatted = formatRupiah(commissionNum);
+        csvContent += `"${orderDate}","${idMitra}","${partnerName}","${customerName}","${phoneNumber}","${address}","${paymentMethod}","${commissionFormatted}"\r\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      const filenameDate = new Date().toISOString().split('T')[0];
+      link.setAttribute('download', `Rekap_Komisi_Mitra_WarungCantik_NSQueen_${filenameDate}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    filterTypeSelect.addEventListener('change', () => {
+      const val = filterTypeSelect.value;
+      filterDateContainer.style.display = (val === 'date') ? 'block' : 'none';
+      filterMonthContainer.style.display = (val === 'month') ? 'block' : 'none';
+      filterYearContainer.style.display = (val === 'year') ? 'block' : 'none';
+      populateHistoryTable();
+      populateCommissionSummary();
+    });
+
+    [filterDateInput, filterMonthInput, filterYearSelect].forEach(input => {
+      input.addEventListener('change', () => {
+        populateHistoryTable();
+        populateCommissionSummary();
+      });
+    });
+
+    function populateHistoryTable() {
+      historyBody.innerHTML = '';
+      const orders = getOrdersFromStorage();
+      if (!orders.length) {
+        noHistoryMsg.style.display = 'block';
+        return;
+      } else {
+        noHistoryMsg.style.display = 'none';
+      }
+      const filterType = filterTypeSelect.value;
+      const filterDateVal = filterDateInput.value;
+      const filterMonthVal = filterMonthInput.value;
+      const filterYearVal = filterYearSelect.value;
+      const filteredOrders = orders.filter(order => {
+        if (!order.orderDate) return false;
+        const dparts = order.orderDate.split('/');
+        if (dparts.length !== 3) return false;
+        const [d, m, y] = dparts;
+        if (filterType === 'all') return true;
+        if (filterType === 'date') {
+          if (!filterDateVal) return true;
+          const fDate = new Date(filterDateVal);
+          return fDate.getDate() === parseInt(d) &&
+            (fDate.getMonth() + 1) === parseInt(m) &&
+            fDate.getFullYear() === parseInt(y);
+        }
+        if (filterType === 'month') {
+          if (!filterMonthVal) return true;
+          const [fy, fm] = filterMonthVal.split('-');
+          return parseInt(fm) === parseInt(m) && parseInt(fy) === parseInt(y);
+        }
+        if (filterType === 'year') {
+          if (!filterYearVal) return true;
+          return parseInt(y) === parseInt(filterYearVal);
+        }
+        return true;
+      });
+      if (!filteredOrders.length) {
+        noHistoryMsg.style.display = 'block';
+        return;
+      } else {
+        noHistoryMsg.style.display = 'none';
+      }
+      filteredOrders.forEach((order, index) => {
+        const tr = document.createElement('tr');
+        const expandTd = document.createElement('td');
+        const expandBtn = document.createElement('button');
+        expandBtn.type = 'button';
+        expandBtn.textContent = '+';
+        expandBtn.className = 'expand-btn';
+        expandBtn.setAttribute('aria-expanded', 'false');
+        expandBtn.setAttribute('aria-controls', `productDetails${index}`);
+        expandBtn.setAttribute('aria-label', 'Tampilkan detail produk');
+        expandTd.appendChild(expandBtn);
+        tr.appendChild(expandTd);
+        const orderDateTd = document.createElement('td');
+        orderDateTd.textContent = order.orderDate;
+        tr.appendChild(orderDateTd);
+        const idMitraTd = document.createElement('td');
+        idMitraTd.textContent = order.idMitra;
+        tr.appendChild(idMitraTd);
+        const partnerTd = document.createElement('td');
+        partnerTd.textContent = order.partnerName;
+        tr.appendChild(partnerTd);
+        const custTd = document.createElement('td');
+        custTd.textContent = order.customerName;
+        tr.appendChild(custTd);
+        const phoneTd = document.createElement('td');
+        phoneTd.textContent = order.phoneNumber;
+        tr.appendChild(phoneTd);
+        const paymentTd = document.createElement('td');
+        paymentTd.textContent = order.paymentMethod;
+        tr.appendChild(paymentTd);
+        const totalTd = document.createElement('td');
+        totalTd.textContent = order.totalPayment;
+        tr.appendChild(totalTd);
+        const commissionTd = document.createElement('td');
+        commissionTd.textContent = order.commission;
+        tr.appendChild(commissionTd);
+        historyBody.appendChild(tr);
+        const detailTr = document.createElement('tr');
+        detailTr.className = 'product-detail-row';
+        detailTr.id = `productDetails${index}`;
+        detailTr.style.display = 'none';
+        const detailTd = document.createElement('td');
+        detailTd.colSpan = 9;
+        let detailHtml = `<strong>Detail Produk:</strong><table style="width:100%; border-collapse: collapse; margin-top: 0.5rem;">
+        <thead><tr>
+        <th style="border:1px solid #75320a; padding:0.3rem;">Produk</th>
+        <th style="border:1px solid #75320a; padding:0.3rem;">Qty</th>
+        <th style="border:1px solid #75320a; padding:0.3rem;">Harga (Rp)</th>
+        </tr></thead><tbody>`;
+        order.products.forEach(p => {
+          detailHtml += `<tr>
+          <td style="border:1px solid #75320a; padding:0.3rem;">${p.product}</td>
+          <td style="border:1px solid #75320a; padding:0.3rem;">${p.qty}</td>
+          <td style="border:1px solid #75320a; padding:0.3rem;">${formatRupiah(p.price)}</td>
+          </tr>`;
+        });
+        detailHtml += '</tbody></table>';
+        detailTd.innerHTML = detailHtml;
+        detailTr.appendChild(detailTd);
+        historyBody.appendChild(detailTr);
+        expandBtn.addEventListener('click', () => {
+          const isExpanded = expandBtn.getAttribute('aria-expanded') === 'true';
+          expandBtn.textContent = isExpanded ? '+' : '−';
+          expandBtn.setAttribute('aria-expanded', String(!isExpanded));
+          detailTr.style.display = isExpanded ? 'none' : 'table-row';
+        });
+      });
+    }
+
+    function extendCommissionTableHeader() {
+      const commissionTable = document.getElementById('commissionTable');
+      const headRow = commissionTable.querySelector('thead tr');
+      // add headers for new columns only once
+      if(headRow.children.length === 5) {
+        const actionTh = document.createElement('th');
+        actionTh.textContent = 'Aksi';
+        headRow.appendChild(actionTh);
+        const downloadTh = document.createElement('th');
+        downloadTh.textContent = 'Download Bukti';
+        headRow.appendChild(downloadTh);
+      }
+      if(headRow.children.length === 3) {
+        const payoutDateTh = document.createElement('th');
+        payoutDateTh.textContent = 'Tanggal Pencairan';
+        headRow.insertBefore(payoutDateTh, headRow.children[3]);
+        const saldoSetelahTh = document.createElement('th');
+        saldoSetelahTh.textContent = 'Saldo Komisi Setelah Pencairan (Rp)';
+        headRow.insertBefore(saldoSetelahTh, headRow.children[3]);
+        const saldoAwalTh = document.createElement('th');
+        saldoAwalTh.textContent = 'Saldo Komisi Awal (Rp)';
+        headRow.insertBefore(saldoAwalTh, headRow.children[3]);
+        extendCommissionTableHeader();
+      }
+    }
+    extendCommissionTableHeader();
+
+    function getTodayDMY() {
+      const today = new Date();
+      const d = String(today.getDate()).padStart(2,'0');
+      const m = String(today.getMonth()+1).padStart(2,'0');
+      const y = today.getFullYear();
+      return `${d}/${m}/${y}`;
+    }
+
+    function populateCommissionSummary() {
+      commissionBody.innerHTML = '';
+      let orders = getOrdersFromStorage();
+      if (!orders.length) return;
+      const filterType = filterTypeSelect.value;
+      const filterDateVal = filterDateInput.value;
+      const filterMonthVal = filterMonthInput.value;
+      const filterYearVal = filterYearSelect.value;
+      const filteredOrders = orders.filter(order => {
+        if (!order.orderDate) return false;
+        const dparts = order.orderDate.split('/');
+        if (dparts.length !== 3) return false;
+        const [d, m, y] = dparts;
+        if (filterType === 'all') return true;
+        if (filterType === 'date') {
+          if (!filterDateVal) return true;
+          const fDate = new Date(filterDateVal);
+          return fDate.getDate() === parseInt(d) &&
+                 (fDate.getMonth() + 1) === parseInt(m) &&
+                 fDate.getFullYear() === parseInt(y);
+        }
+        if (filterType === 'month') {
+          if (!filterMonthVal) return true;
+          const [fy, fm] = filterMonthVal.split('-');
+          return parseInt(fm) === parseInt(m) && parseInt(fy) === parseInt(y);
+        }
+        if (filterType === 'year') {
+          if (!filterYearVal) return true;
+          return parseInt(y) === parseInt(filterYearVal);
+        }
+        return true;
+      });
+      const commissionMap = {};
+      filteredOrders.forEach(order => {
+        const id = order.idMitra || '(Tidak diisi)';
+        let commissionValue = Number(String(order.commission).replace(/[^\d]/g,'')) || 0;
+        if (!commissionMap[id]) commissionMap[id] = {commission: 0, partnerName: order.partnerName};
+        else if(!commissionMap[id].partnerName) commissionMap[id].partnerName = order.partnerName;
+        commissionMap[id].commission += commissionValue;
+      });
+
+      const payoutData = getCommissionPayoutData();
+
+      const sortedIDs = Object.keys(commissionMap).sort();
+      sortedIDs.forEach(id => {
+        const tr = document.createElement('tr');
+
+        const idTd = document.createElement('td');
+        idTd.textContent = id;
+        tr.appendChild(idTd);
+
+        const partnerNameTd = document.createElement('td');
+        partnerNameTd.textContent = commissionMap[id].partnerName || '';
+        tr.appendChild(partnerNameTd);
+
+        const saldoAwalVal = commissionMap[id].commission;
+        const saldoAwalTd = document.createElement('td');
+        saldoAwalTd.textContent = formatRupiah(saldoAwalVal);
+        tr.appendChild(saldoAwalTd);
+
+        const saldoSetelahVal = (payoutData[id] ? 0 : saldoAwalVal);
+        const saldoSetelahTd = document.createElement('td');
+        saldoSetelahTd.textContent = formatRupiah(saldoSetelahVal);
+        tr.appendChild(saldoSetelahTd);
+
+        const payoutDateTd = document.createElement('td');
+        payoutDateTd.textContent = payoutData[id] || '-';
+        tr.appendChild(payoutDateTd);
+
+        const actionTd = document.createElement('td');
+        const payoutBtn = document.createElement('button');
+        payoutBtn.type = 'button';
+        payoutBtn.textContent = 'Konfirmasi Cairkan Komisi';
+        payoutBtn.style.backgroundColor = '#d94f2a';
+        payoutBtn.style.color = 'white';
+        payoutBtn.style.border = 'none';
+        payoutBtn.style.borderRadius = '6px';
+        payoutBtn.style.padding = '4px 8px';
+        payoutBtn.style.cursor = 'pointer';
+        payoutBtn.style.fontWeight = '600';
+        payoutBtn.addEventListener('click', () => {
+          if(confirm(`Konfirmasi pencairan komisi untuk ID Mitra: ${id}?\nKomisi akan direset menjadi 0 dan tanggal pencairan akan tercatat hari ini.`)) {
+            resetCommissionForMitra(id);
+          }
+        });
+        actionTd.appendChild(payoutBtn);
+        tr.appendChild(actionTd);
+
+        const downloadTd = document.createElement('td');
+        const downloadBtn = document.createElement('button');
+        downloadBtn.type = 'button';
+        downloadBtn.textContent = 'Download Bukti';
+        downloadBtn.style.backgroundColor = '#3263a8';
+        downloadBtn.style.color = 'white';
+        downloadBtn.style.border = 'none';
+        downloadBtn.style.borderRadius = '6px';
+        downloadBtn.style.padding = '4px 8px';
+        downloadBtn.style.cursor = 'pointer';
+        downloadBtn.style.fontWeight = '600';
+        downloadBtn.addEventListener('click', () => {
+          downloadPayoutProof(
+            id, 
+            commissionMap[id].partnerName || '', 
+            payoutData[id] || '-', 
+            saldoAwalVal,
+            saldoSetelahVal
+          );
+        });
+        downloadTd.appendChild(downloadBtn);
+        tr.appendChild(downloadTd);
+
+        commissionBody.appendChild(tr);
+      });
+    }
+
+    async function downloadPayoutProof(idMitra, partnerName, payoutDate, saldoAwal, saldoSetelah) {
+      if (!window.jsPDF) {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({unit:'pt', format: 'a4'});
+      const margin = 40;
+      let cursorY = 40;
+      doc.setFontSize(16);
+      doc.text("Bukti Pencairan Komisi Mitra", margin, cursorY);
+      cursorY += 25;
+      doc.setLineWidth(0.5);
+      doc.line(margin, cursorY, 555, cursorY);
+      cursorY += 25;
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'bold');
+      const colPositions = [margin, margin + 90, margin + 270, margin + 400, margin + 510];
+      doc.text("ID Mitra", colPositions[0], cursorY);
+      doc.text("Nama/Toko Mitra", colPositions[1], cursorY);
+      doc.text("Saldo Awal (Rp)", colPositions[2], cursorY);
+      doc.text("Saldo Setelah Pencairan (Rp)", colPositions[3], cursorY);
+      doc.text("Tanggal Pencairan", colPositions[4], cursorY);
+      cursorY += 15;
+      doc.setLineWidth(0.2);
+      doc.line(margin, cursorY, 555, cursorY);
+      cursorY += 35;
+      doc.setFont('helvetica', 'normal');
+      doc.text(idMitra, colPositions[0], cursorY);
+      doc.text(partnerName, colPositions[1], cursorY);
+      doc.text(formatRupiah(saldoAwal).toString(), colPositions[2], cursorY, {align:'right'});
+      doc.text(formatRupiah(saldoSetelah).toString(), colPositions[3], cursorY, {align:'right'});
+      doc.text(payoutDate, colPositions[4], cursorY);
+      cursorY += 50;
+      doc.setFontSize(12);
+      doc.text("Terima kasih atas kerjasamanya.", margin, cursorY);
+      doc.save(`Bukti_Pencairan_Komisi_${idMitra}_${payoutDate.replace(/\//g, '-')}.pdf`);
+    }
+
+    function resetCommissionForMitra(idMitra) {
+      let orders = getOrdersFromStorage();
+      let changed = false;
+      orders = orders.map(order => {
+        if(order.idMitra === idMitra) {
+          order.commission = '0';
+          changed = true;
+        }
+        return order;
+      });
+      if(changed) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+        let payoutData = getCommissionPayoutData();
+        payoutData[idMitra] = getTodayDMY();
+        saveCommissionPayoutData(payoutData);
+        alert(`Komisi untuk ID Mitra: ${idMitra} telah direset menjadi 0 dan tanggal pencairan tercatat.`);
+        populateHistoryTable();
+        populateCommissionSummary();
+      }
+    }
+
+    function getTodayDMY() {
+      const today = new Date();
+      const d = String(today.getDate()).padStart(2,'0');
+      const m = String(today.getMonth()+1).padStart(2,'0');
+      const y = today.getFullYear();
+      return `${d}/${m}/${y}`;
+    }
+
+    updateTotals();
+    populateHistoryTable();
+    populateCommissionSummary();
+  </script>
+</body>
+</html>
